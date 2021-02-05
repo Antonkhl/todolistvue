@@ -20,6 +20,7 @@
         <div v-if="!isEditing">
         <input type="text" v-model="todo">
         <input type="submit" value="Add" @click="storeTodo">
+        <input type="submit" value="Remove All" @click="removeAll">
     </div>
 
     <div v-else>
@@ -69,7 +70,12 @@
 
                 deleteTodo(index) {
                 this.todos.splice(index, 1)
+                },
+
+                removeAll() {
+                    this.todos.splice(this.todo)
                 }
+
             }
         })
     </script>
