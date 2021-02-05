@@ -4,20 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+
+    <style>
+        
+    </style>
 </head>
 <body>
-<div id="app">
-    <div class="container">
+<div id="app" class="container">
         <h1>Todo List</h1>
 
         <div v-if="!isEditing">
         <input type="text" v-model="todo">
-        <input type="submit" value="add" @click="storeTodo">
+        <input type="submit" value="Add" @click="storeTodo">
     </div>
 
     <div v-else>
         <input type="text" v-model="todo">
-        <input type="submit" value="update" @click="updateTodo">
+        <input type="submit" value="Update" @click="updateTodo">
     </div>
 
         <ol>
@@ -25,11 +32,10 @@
                 {{ todo }}
 
                 <button @click="editTodo(index, todo)">Edit</button>
-                <button @click="deleteTodo(index)">Delete</button>
+                <button @click="removeTodo(index)">Delete</button>
             </li>
         </ol>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script>
@@ -38,9 +44,9 @@
 
             data: {
                 isEditing: false,
-                selectedIndex: null,
                 todo: '',
-                todos: ['Go to market', 'buy new course']
+                todos: ['Go to market', 'buy new course'],
+                selectedTodo: null
             },
 
             methods: {
@@ -56,7 +62,8 @@
                 },
 
                 updateTodo() {
-                this.todos.splice(this.selectedindex, 1, this.todo)
+                this.todos.splice(this.selectedIndex, 1, this.todo)
+                this.todo = ''
                 this.isEditing = false
                 },
 
